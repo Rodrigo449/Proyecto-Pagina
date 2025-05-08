@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/Proyecto Propio/CSS/Style.css">
+    <script src="/Proyecto Propio/index.js" defer></script>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> -->
+    <script src="https://kit.fontawesome.com/61e6876d4e.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        // Aplicar el tema oscuro antes de cargar la página completamente
+        // if (localStorage.getItem('theme') === 'dark-theme') {
+        //     document.documentElement.classList.add('dark-theme');
+        // }
+    </script>
+</head>
+
+<body>
+    <!-- <div id="header-container"></div> -->
+    <header>
+        <div class="Header_Superior">
+            <div class="logo">
+                <img src="/Proyecto Propio/Image/LogoMR.jpg" alt="Imagen_Logo">
+            </div>
+            <div class="Search">
+                <input type="text" id="searchInput" placeholder="¿Qué es lo que buscas aquí?" onkeyup="buscar()">
+                <ul id="resultList"></ul> <!-- Aquí se mostrarán las sugerencias -->
+                <a href="#"><i class='bx bx-search-alt-2 Lup'></i></a>
+            </div>
+            <div class="Oscuro">
+                <i class="fa-solid fa-moon" id="DarkMode"></i>
+                <i class="fa-solid fa-sun" id="sun"></i>
+
+            </div>
+        </div>
+
+        <div class="container__menu">
+
+            <div class="menu">
+                <input type="checkbox" id="check__menu">
+                <label id="label__check" for="check__menu">
+                    <i class="fa-solid fa-bars  icon__menu"></i>
+                </label>
+                <a href="#" id="myBtn" class="ant-User"><i class='bx bxs-user-circle User'></i></a>
+                <nav>
+                    <ul>
+                        <li> <a href="Index.html"></a></li>
+                        <li> <a href="Productos.html" id="selected">Productos</a>
+                            <ul>
+                                <li><a href="celulares.html">
+                                        <div class="icon-line1"></div>Celulares
+                                    </a></li>
+                                <li><a href="consolas.html">
+                                        <div class="icon-line2"></div>Consolas
+                                    </a></li>
+                                <li><a href="portatiles.html">
+                                        <div class="icon-line3"></div>Portatiles
+                                    </a></li>
+                                <li><a href="monitores.html">
+                                        <div class="icon-line4"></div>Monitores
+                                    </a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="Nuevo.html">Nuevo</a></li>
+                        <li> <a href="Imagenes.html">Imagenes</a></li>
+                        <li> <a href="Sobre Mi.html">Sobre Mi</a></li>
+                        <li> <a href="Opiniones.html">Opiniones</a></li>
+
+                        <!-- MODAL EN GENERAL-->
+                    </ul>
+                </nav>
+                <div id="myModal" class="Modal">
+                    <!-- CONTENIDO MODAL -->
+                    <div class="cont-todo" id="cont-todo">
+                        <div class="cont-trasera">
+                            <div class="cajaTrasera-login">
+                                <h3>¿Ya tienes una Cuenta?</h3>
+                                <p>Inicia secion para poder comprar</p>
+                                <button id="btn-iniciar-sesion">Iniciar sesion</button>
+                            </div>
+                        
+                            <div class="cajaTrasera-register">
+                                <h3>¿Aún no tienes una cuenta?</h3>
+                                <p>Registratate para que puedas acceder</p>
+                                <button id="btn-iniciar-registrarse">Registrarse</button>
+                            </div>
+                        </div>
+
+                            <div class="contenedorLogin-Register">
+                                
+                                <form action="" class="formulario-Login">
+                                    <span class="close" id="close" &times;><i class='bx bx-x-circle'></i></span>
+                                    <h2>Iniciar Sesión</h2>
+
+                                    <div class="input-container">
+                                        <input type="email" required>
+                                        <label for="urs">Correo Electronico</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input type="password" required>
+                                        <label for="psw">Contraseña</label>
+                                    </div>
+                        
+                                    <button>Entrar</button>
+                                </form>
+                                <form action="" class="formulario-Register">
+                                    <span class="close" id="closes" &times;><i class='bx bx-x-circle'></i></span>
+                                    <h2>Registrarse</h2>
+
+                                    <div class="input-container">
+                                        <input type="text" required>
+                                        <label for="urs">Nombre y Apellido</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input type="email" required>
+                                        <label for="urs">Email</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input type="text" required>
+                                        <label for="urs">Nombre de Usuario</label>
+                                    </div>
+
+                                    <div class="input-container">
+                                        <input type="password" required>
+                                        <label for="psw">Contraseña</label>
+                                    </div>
+
+
+                                    <button>Registrarse</button>
+                                </form>
+                            </div>
+
+                            
+                            <!-- <h3 style="text-align: center;">INGRESAR</h3>
+    
+                                    <i class='bx bxs-user'></i>
+    
+                                    <div class="input-name">
+                                        <input type="text" class="form-controlA" id="urs">
+                                        <label for="urs">Ingresar Nombre</label>
+                                    </div>
+                                    <div class="input-pwd">
+                                        <input type="password" class="form-controlB" id="pwd">
+                                        <label for="usr">Ingresar Contraseña </label>
+                                    </div>
+                                    <button class="acces">Ingresar</button> -->
+                    </div>
+
+                    <!-- CONTENIDO MODAL -->
+                </div>
+                <!-- CONTENIDO MODAL -->
+            </div>
+            <!-- MODAL  EN GENERAL-->
+        </div>
+    </header>
+    <!-- ======================================CARD DE SAMSUNG============================== -->
+    <div class="firstrow">
+        <div class="container_card">
+            <div class="card" data-product="samsung S22 Ultra" data-image="/Proyecto Propio/Image/samsungS22.png" 
+            data-description="Es bonito"
+            data-memoria="12GB"
+            data-almacenamiento="125GB"
+            data-camara="14Hz"
+            data-color="Negro" 
+            data-price="550.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/samsungS22.png" alt="samsungS22ultra">
+                        <h3>Samsung S22 Ultra</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                        </div>
+                        <p>Descripcion del producto...</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================CARD DE SAMSUNG============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =======================================CARD DE IPHONE============================== -->
+            <div class="card" data-product="iphone 14" data-image="/Proyecto Propio/Image/iphone14.png" 
+            data-description="Es bonito"
+            data-memoria="6GB"
+            data-almacenamiento="128GB"
+            data-camara="12MP"
+            data-color="Negro o Blanco"
+            data-price="680.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/iphone14.png" alt="imphone14">
+                        <h3>Iphone 14</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star-half"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+
+            </div>
+            <!-- =======================================CARD DE IPHONE============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =====================================CARD DE MOTOROLA============================== -->
+            <div class="card" data-product="Motorola G60" data-image="/Proyecto Propio/Image/motorolag60.png" 
+            data-description="Es bonito"
+            data-memoria="6GB"
+            data-almacenamiento="128GB"
+            data-camara="Triple 108MP+8MP+2MP"
+            data-color="Plateado o negro"
+            data-price="300.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/motorolag60.png" alt="motorola">
+                        <h3>Motorola G60</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bx-star"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    
+    <!-- =====================================CARD DE MOTOROLA============================== -->
+
+    <!-- ======================================================================================================== -->
+    <!-- ======================================================================================================== -->
+
+    <!-- ======================================CARD DE PS5============================== -->
+    <div class="secondrow">
+        <div class="container_card">
+            <div class="card" data-product="Play Sattion 5" data-image="/Proyecto Propio/Image/ps5.png" 
+            data-description="Es bonito"
+            data-memoria="16GB"
+            data-almacenamiento="1TB"
+            data-juegos="2"
+            data-color="Blanco y Negro"
+            data-price="600.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/ps5.png" alt="Play Station 5">
+                        <h3>Play Station 5 Standar</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================CARD DE PS5============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =======================================CARD DE XBOX============================== -->
+            <div class="card" data-product="Xbox Serie X" data-image="/Proyecto Propio/Image/xboxX.png" 
+            data-description="Es bonito"
+            data-memoria="16GB"
+            data-almacenamiento="1TB"
+            data-color="Negro"
+            data-price="670.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/xboxX.png" alt="xbox X">
+                        <h3>Xbox Serie X</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star-half"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- =======================================CARD DE XBOX============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =====================================CARD DE NINTENDO SWITCH============================== -->
+            <div class="card" data-product="Nintendo Switch" data-image="/Proyecto Propio/Image/nintendoSwitch.png" 
+            data-description="Es bonito"
+            data-memoria="4GB"
+            data-almacenamiento="2TB"
+            data-color="Negro"
+            data-price="320.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/nintendoSwitch.png" alt="nintendo Switch">
+                        <h3>Nintendo Switch</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bx-star"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =====================================CARD DE NINTENDO SWITCH============================== -->
+
+    <!-- ======================================================================================================== -->
+    <!-- ======================================================================================================== -->
+
+    <!-- ======================================CARD DE NOTEBOOKACER============================== -->
+    <div class="threerow">
+        <div class="container_card">
+            <div class="card" data-product="Notebook Acer" data-image="/Proyecto Propio/Image/notebookAcer.png" 
+            data-description="Es bonito"
+            data-memoria="12GB"
+            data-almacenamiento="512GB"
+            data-proce="Intel Core i5"
+            data-color="Negro"
+            data-price="980.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/notebookAcer.png" alt="Notebook Acer">
+                        <h3>Notebook Acer</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================CARD DE NOTEBOOKACER============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =======================================CARD DE NOTEBOOKGAMER============================== -->
+            <div class="card" data-product="Notebook HP Gamer" data-image="/Proyecto Propio/Image/notebookhpGamer.png" 
+            data-description="Es bonito"
+            data-memoria="8GB"
+            data-almacenamiento="512GB"
+            data-proce="Intel Core i5"
+            data-color="Negro"
+            data-price="780.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/notebookhpGamer.png" alt="Notebook HP Gamer">
+                        <h3>Notebook Hp Gamer</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star-half"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- =======================================CARD DE NOTEBOOKGAMER============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =====================================CARD DE NOTEBOOKHP============================== -->
+            <div class="card" data-product="Notebook HP" data-image="/Proyecto Propio/Image/notebookHp.png" 
+            data-description="Es bonito"
+            data-memoria="8GB"
+            data-almacenamiento="512GB"
+            data-proce="AMD Rayzen 5"
+            data-color="Plateado"
+            data-price="480.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/notebookHp.png" alt="Notebook HP">
+                        <h3>Notebook HP</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bx-star"></i>
+                        </div>
+                        <p>Descripcion del producto </p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =====================================CARD DE NOTEBOOKHP============================== -->
+
+    <!-- ======================================================================================================== -->
+    <!-- ======================================================================================================== -->
+
+    <!-- ======================================CARD DE MONITOR MASTER G============================== -->
+    <div class="fourrow">
+        <div class="container_card">
+            <div class="card" data-product="Monitor Master G" data-image="/Proyecto Propio/Image/monitorCoolerMasterG.png" 
+            data-description="Es bonito"
+            data-pantalla="24cm"
+            data-imagen="144Hz"
+            data-dimenciones="32cm x54cm x4cm"
+            data-color="Negro"
+            data-price="140.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/monitorCoolerMasterG.png" alt="Monitor Cooler">
+                        <h3>Monitor MasterG</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ======================================CARD DE MONITOR MASTER G============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =======================================CARD DE MONITOR CAIXUN============================== -->
+            <div class="card" data-product="Monitor Caixun" data-image="/Proyecto Propio/Image/monitorCaixun.png" 
+            data-description="Es bonito"
+            data-pantalla="24cm"
+            data-imagen="144Hz"
+            data-dimenciones="32cm x54cm x4cm"
+            data-color="Negro"
+            data-price="140.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/monitorCaixun.png" alt="Monitor Caixun">
+                        <h3>Monitor Caixun</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star-half"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <!-- =======================================CARD DE MONITOR CAIXUN============================== -->
+
+            <!-- ====================================================================================== -->
+
+            <!-- =====================================CARD DE MONITOR ELSA============================== -->
+            <div class="card" data-product="Monitor ELSA" data-image="/Proyecto Propio/Image/monitorElsa.png"
+            data-description="Es bonito"  
+            data-pantalla="24cm"
+            data-imagen="165Hz"
+            data-dimenciones="60cm x9cm x39cm"
+            data-color="Negro"
+            data-price="1150.000">
+                <div class="box box1">
+                    <div class="content">
+                        <img src="/Proyecto Propio/Image/monitorElsa.png" alt="Monitor Elsa">
+                        <h3>Monitor ELSA</h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <div class="icon">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bx-star"></i>
+                        </div>
+                        <p>Descripcion del producto</p>
+                        <a href="#" class="det-modal">Detalles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modalCard" id="modalCard">
+        <div class="cardContent" id="cardContentt">
+            <span class="closeC" id="closeCard" &times;><i class='bx bx-x-circle exe'></i></span>
+            <img id="modal-image"  src="" alt="motorola">
+            <h3 id="modal-title">titulo Producto</h3>
+            <ul id="modal-details-list"></ul>
+            <div id="modal-price"></div>
+            <a href="#">Agregar</a>
+        </div>
+    </div>
+    <!-- =====================================CARD DE MONITOR ELSA============================== -->
+    <!-- ======================================================================================================== -->
+    <!-- ======================================================================================================== -->
+
+    <footer class="footer-distributed">
+
+        <div class="footer-left">
+
+            <span><img src="/Proyecto Propio/Image/LogoMR.jpg" alt=""></span>
+
+            <p class="footer-links">
+                <a href="/Proyecto Propio/Index.html" class="link-1">Home</a>
+
+                <a href="Productos.html">Productos</a>
+
+                <!-- <a href="#">Pricing</a>
+      
+        <a href="#">About</a>
+        
+        <a href="#">Faq</a>
+        
+        <a href="#">Contact</a> -->
+            </p>
+
+            <p class="footer-company-name">MR.Igenier © 2024</p>
+        </div>
+
+        <div class="footer-center">
+
+            <div>
+                <i class="fa fa-map-marker"></i>
+                <p><span>Alberto Lorenzi #725 Puente Alto</span> Solana Beach, California</p>
+            </div>
+
+            <div>
+                <i class="fa fa-phone"></i>
+                <p>+56 976730665</p>
+            </div>
+
+            <div>
+                <i class="fa fa-envelope"></i>
+                <p><a href="mailto:support@company.com">ignaciocdi3@gmail.com</a></p>
+            </div>
+
+        </div>
+
+        <div class="footer-right">
+
+            <p class="footer-company-about">
+                <span>Sobre la compañia</span>
+                Somos una empresa de venta de productos digitales..
+            </p>
+
+            <div class="footer-icons">
+
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,105 @@
+Samsung S22 Ultra:
+
+Memoria RAM: 12GB (9)
+Almacenamiento: 256GB (9)
+Camara: 40MP (3)
+Color: Negro (12)
+Precio: 550.000
+==============================================
+
+Iphone 14:
+
+Mmemoria RAM: 6GB--
+Almacenamiento: 128GB--
+Camara 12MP--
+Color: Negro o Blanco--
+Precio: 680.000
+
+==============================================
+
+Motorola G:
+
+Mmemoria RAM: 6GB--
+Almacenamiento: 128GB--
+Camara:Triple 108MP+8MP+2MP--
+Color: Plateado o Negro--
+Precio: 300.000
+=====================================================================================
+
+PS5:
+
+Memoria RAM:16GB--
+Almacenamiento: 1TB--
+Juegos: 2 (1)
+Color: Blanco y Negro--
+Precio: 600.000
+==============================================
+
+Xbox X:
+
+Memoria RAM: 16GB--
+Almacenamiento: 1TB--
+Color: Negro--
+Precio: 670.000
+==============================================
+
+Nintendo Switch:
+
+Memoria RAM:4GB--
+Almacenamiento: 2T--
+Color: Negro--
+Precio:320.000
+=======================================================================================
+
+Notebook Acer
+Memoria RAM:12GB--
+Almacenamiento:512GB--
+Procesador: Intel Core i5 (3)
+Color: Negro--
+Precio:980.000
+==============================================
+
+Notebook HP Gamer
+Memoria RAM: 8GB--
+Almacenamiento: 512GB--
+Procesador: Intel Core i5--
+Color: Negro--
+Precio:780.000
+===============================================
+
+Notebook HP
+Memoria RAM: 8GB--
+Almacenamiento: 512GB--
+Procesador: AMD Rayzen 5--
+Color: Plateado--
+Precio:480.000
+========================================================================================
+
+Monitor Master G
+Tamaño de pantalla: 24cm (3)
+Velocidad de imagen: 144Hz (3)
+Dimenciones: 32cm x54cm x4cm (3)
+Color: Negro----
+Precio: 140.000
+===============================================
+
+Monitor Caixun
+Tamaño de pantalla: 24cm--
+Velocidad de Imagen: 100Hz--
+Dimenciones: 32cm x54cm x4cm--
+Color: Negro----
+Precio:90.000
+===============================================
+
+Monitor Elsa
+Tamaño de pantalla: 24cm--
+Velocidad de Imagen: 165Hz--
+Dimenciones: 60cm x9cm x39cm--
+Color: Negro----
+Precio: 115.000
+==========================================================================================
+
+
+
+
+pass:Florencianba@21, 123456, Florencianba2

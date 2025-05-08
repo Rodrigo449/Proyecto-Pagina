@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/CSS/Style.css">
+    <script src="/JS/index.js" defer></script>
+    <script src="/JS/carrito.js"></script>
+    <script src="https://kit.fontawesome.com/61e6876d4e.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="icon" href="/Image/favicon.ico" sizes="any">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MR Ingenier" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>Productos</title>
+    <script>
+        // Aplicar el tema oscuro antes de cargar la página completamente
+        // if (localStorage.getItem('theme') === 'dark-theme') {
+        //     document.documentElement.classList.add('dark-theme');
+        // }
+    </script>
+</head>
+
+<body>
+
+    <div class="firstrow">
+
+        <div class="container_card">
+            <% 
+            const celulares = productos.filter(p => p.categoria === 'celulares').slice(0, 3);
+            celulares.forEach(function(producto) { 
+            %>
+                <div class="card" 
+                     data-id="<%= producto.id %>"
+                     data-product="<%= producto.nombre %>" 
+                     data-image="<%= producto.imagen %>" 
+                     data-description="<%= producto.descripcion %>" 
+                     data-price="<%= new Intl.NumberFormat('es-CL').format(producto.precio) %>"
+                     <% if (producto.memoria) { %>data-memoria="<%= producto.memoria %>"<% } %>
+                     <% if (producto.almacenamiento) { %>data-almacenamiento="<%= producto.almacenamiento %>"<% } %>
+                     <% if (producto.camara) { %>data-camara="<%= producto.camara %>"<% } %>
+                     <% if (producto.color) { %>data-color="<%= producto.color %>"<% } %>
+                >
+                    <div class="box box1">
+                        <div class="content">
+                            <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                            <h3><%= producto.nombre %></h3>
+                        </div>
+                    </div>
+                    <div class="box box2">
+                        <div class="content">
+                            <p><%= producto.descripcion.substring(0, 100) %>...</p>
+                            <p class="precio">$<%= new Intl.NumberFormat('es-CL').format(producto.precio) %></p>
+                            <a href="#" class="det-modal">Ver detalles</a>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+
+    <div class="secondrow">
+        <div class="container_card">
+        <% 
+        const consolas = productos.filter(p => p.categoria === 'consolas').slice(0, 3);
+        consolas.forEach(function(producto) { 
+        %>
+            <div class="card" 
+                 data-id="<%= producto.id %>"
+                 data-product="<%= producto.nombre %>" 
+                 data-image="<%= producto.imagen %>" 
+                 data-description="<%= producto.descripcion %>" 
+                 data-price="<%= new Intl.NumberFormat('es-CL').format(producto.precio) %>"
+                 <% if (producto.memoria) { %>data-memoria="<%= producto.memoria %>"<% } %>
+                 <% if (producto.almacenamiento) { %>data-almacenamiento="<%= producto.almacenamiento %>"<% } %>
+                 <% if (producto.camara) { %>data-camara="<%= producto.camara %>"<% } %>
+                 <% if (producto.color) { %>data-color="<%= producto.color %>"<% } %>
+            >
+                <div class="box box1">
+                    <div class="content">
+                        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                        <h3><%= producto.nombre %></h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <p><%= producto.descripcion.substring(0, 100) %>...</p>
+                        <p class="precio">$<%= new Intl.NumberFormat('es-CL').format(producto.precio) %></p>
+                        <a href="#" class="det-modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+
+
+    <div class="threerow">
+        <div class="container_card">
+        <% 
+        const portatiles = productos.filter(p => p.categoria === 'portatiles').slice(0, 3);
+        portatiles.forEach(function(producto) { 
+        %>
+            <div class="card" 
+                 data-id="<%= producto.id %>"
+                 data-product="<%= producto.nombre %>" 
+                 data-image="<%= producto.imagen %>" 
+                 data-description="<%= producto.descripcion %>" 
+                 data-price="<%= new Intl.NumberFormat('es-CL').format(producto.precio) %>"
+                 <% if (producto.memoria) { %>data-memoria="<%= producto.memoria %>"<% } %>
+                 <% if (producto.almacenamiento) { %>data-almacenamiento="<%= producto.almacenamiento %>"<% } %>
+                 <% if (producto.camara) { %>data-camara="<%= producto.camara %>"<% } %>
+                 <% if (producto.color) { %>data-color="<%= producto.color %>"<% } %>
+            >
+                <div class="box box1">
+                    <div class="content">
+                        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                        <h3><%= producto.nombre %></h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <p><%= producto.descripcion.substring(0, 100) %>...</p>
+                        <p class="precio">$<%= new Intl.NumberFormat('es-CL').format(producto.precio) %></p>
+                        <a href="#" class="det-modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+
+    <div class="fourrow">
+        <div class="container_card">
+        <% 
+        const monitores = productos.filter(p => p.categoria === 'monitores').slice(0, 3);
+        monitores.forEach(function(producto) { 
+        %>
+            <div class="card" 
+                 data-id="<%= producto.id %>"
+                 data-product="<%= producto.nombre %>" 
+                 data-image="<%= producto.imagen %>" 
+                 data-description="<%= producto.descripcion %>" 
+                 data-price="<%= new Intl.NumberFormat('es-CL').format(producto.precio) %>"
+                 <% if (producto.memoria) { %>data-memoria="<%= producto.memoria %>"<% } %>
+                 <% if (producto.almacenamiento) { %>data-almacenamiento="<%= producto.almacenamiento %>"<% } %>
+                 <% if (producto.camara) { %>data-camara="<%= producto.camara %>"<% } %>
+                 <% if (producto.color) { %>data-color="<%= producto.color %>"<% } %>
+            >
+                <div class="box box1">
+                    <div class="content">
+                        <img src="<%= producto.imagen %>" alt="<%= producto.nombre %>">
+                        <h3><%= producto.nombre %></h3>
+                    </div>
+                </div>
+                <div class="box box2">
+                    <div class="content">
+                        <p><%= producto.descripcion.substring(0, 100) %>...</p>
+                        <p class="precio">$<%= new Intl.NumberFormat('es-CL').format(producto.precio) %></p>
+                        <a href="#" class="det-modal">Ver detalles</a>
+                    </div>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+
+
+
+
+    <div class="modalCard" id="modalCard">
+        <div class="cardContent" id="cardContentt">
+            <span class="closeC" id="closeCard" &times;><i class='bx bx-x-circle exe'></i></span>
+            <img id="modal-image" src="" alt="image">
+            <h3 id="modal-title">titulo Producto</h3>
+            <ul id="modal-details-list"></ul>
+            <div id="modal-price"></div>
+            <a id="btn-agregar-al-carrito" class="btn btn-success">Agregar al carrito</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

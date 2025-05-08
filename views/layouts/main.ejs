@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="/CSS/Style.css">
+    <script src="/JS/carrito.js"></script>
+    <script src="/JS/index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/61e6876d4e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <link rel="icon" href="/Image/favicon.ico" sizes="any">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MR Ingenier" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+
+    <title>
+        <%= typeof title !=='undefined' ? title : 'Mi Sitio' %>
+    </title>
+
+
+</head>
+
+<body class="<%= locals.user && locals.user.theme === 'dark' ? 'dark-theme' : '' %>" 
+  data-user-logged-in="<%= locals.user ? 'true' : 'false' %>">
+    <!-- Incluir el header -->
+    <%- include('../partials/navigation') %>
+
+        <!-- Contenido específico de la página -->
+        <main>
+                <%- body %>
+        </main>
+
+        <!-- Incluir el footer -->
+        <%- include('../partials/foot') %>
+
+
+
+
+        
+<!-- <script>
+    // Verificar si hay una alerta para mostrar
+    <% if (typeof alertTitle !== 'undefined' && alertTitle) { %>
+      Swal.fire({
+        title: '<%= alertTitle %>',
+        text: '<%= alertMessage %>',
+        icon: '<%= alertIcon %>',
+        showConfirmButton: <%= showConfirmButton %>,
+        <% if (timer) { %>
+        timer: <%= timer %>,
+        <% } %>
+        <% if (typeof ruta !== 'undefined' && ruta) { %>
+        willClose: () => {
+          window.location = '<%= ruta %>';
+        }
+        <% } %>
+      });
+    <% } %>
+  </script> -->
+
+  <% if (locals.alert) { %>
+    <script>
+      // Solo mostrar la alerta una vez cuando se carga la página
+      let alertaMostrada = sessionStorage.getItem('alertaMostrada');
+      if (!alertaMostrada) {
+        document.addEventListener('DOMContentLoaded', function() {
+          Swal.fire({
+            title: "<%= alertTitle %>",
+            text: "<%= alertMessage %>",
+            icon: "<%= alertIcon %>",
+            showConfirmButton: <%= showConfirmButton %>,
+            timer: <%= timer ? timer : 'null' %>
+          });
+          // Marcar que ya se mostró la alerta
+          sessionStorage.setItem('alertaMostrada', 'true');
+        });
+      }
+    </script>
+  <% } %>
+
+
+
+  <% if (typeof alert !== 'undefined' && alertTitle) { %>
+    Swal.fire({
+      title: '<%= alertTitle %>',
+      text: '<%= alertMessage %>',
+      icon: '<%= alertIcon %>',
+      showConfirmButton: <%= showConfirmButton %>,
+      <% if (timer) { %>
+      timer: <%= timer %>,
+      <% } %>
+      <% if (typeof ruta !== 'undefined' && ruta) { %>
+      willClose: () => {
+        window.location = '<%= ruta %>';
+      }
+      <% } %>
+    });
+  <% } %>
+  
+
+</body>
+
+</html>

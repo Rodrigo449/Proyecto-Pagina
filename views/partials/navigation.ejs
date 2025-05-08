@@ -1,0 +1,192 @@
+<header>
+    <div class="Header_Superior">
+        <div class="logo">
+            <img src="/Image/LogoMR.jpg" alt="Imagen_Logo">
+        </div>
+        <div class="Search">
+            <input type="text" id="searchInput" placeholder="¿Qué es lo que buscas aquí?" onkeyup="buscar()">
+            <ul id="resultList"></ul> <!-- Aqui se mostraran las sugerencias -->
+            <a href="#"><i class='bx bx-search-alt-2 Lup'></i></a>
+        </div>
+        <div class="Oscuro">
+            <i class="fa-solid fa-moon" id="DarkMode"></i>
+            <i class="fa-solid fa-sun" id="sun"></i>
+
+        </div>
+    </div>
+
+    <div class="container__menu">
+
+        <div class="menu">
+            <input type="checkbox" id="check__menu">
+            <label id="label__check" for="check__menu">
+                <i class="fa-solid fa-bars  icon__menu"></i>
+            </label>
+
+
+            <a href="/Carrito" class="carro"><i class="fa-solid fa-cart-shopping shop"></i> </a>
+            <!-- <a href="#" id="myBtn" class="ant-User">
+                <i class='bx bxs-user-circle User'></i>
+                <% if (typeof user !== 'undefined') { %>
+                    <div><%= user.name %> | <a href="/logout">Cerrar sesión</a></div>
+                <% } else { %>
+                    <div>Iniciar sesión</div>
+                <% } %>
+            </a> -->
+
+
+            <div class="btn-ini">
+                <a href="#" id="myBtn" class="ant-User">
+                    <i class='bx bxs-user-circle User'></i>
+                    <% if (typeof user !=='undefined' ) { %>
+                        <div class="cerrar-sesion">
+                            <%= user.name %> | Cerrar sesión
+                        </div>
+                        <% } else { %>
+                            <div class="iniciar-sesion"><b>Iniciar sesión</b></div>
+                            <% } %>
+                </a>
+
+            </div>
+
+
+            <!-- <div class="ant-User">
+                <i class='bx bxs-user-circle User' id="myBtn"></i>
+              
+                <% if (typeof user !== 'undefined') { %>
+                  <div class="user-actions">
+                    <span><%= user.name %></span> |
+                    <form action="/logout" method="POST" style="display:inline;">
+                      <button type="submit" class="logout-btn">Cerrar sesión</button>
+                    </form>
+                  </div>
+                <% } else { %>
+                  <div>
+                    <a href="#" class="sesion-text">Iniciar sesión</a>
+                  </div>
+                <% } %>
+              </div> -->
+
+            <nav>
+                <ul>
+                    <li> <a href="/" class="<%= currentPage === 'index' || currentPage === '' ? 'active' : '' %>"></a></li>
+                    <li> <a href="/productos" class="<%= currentPage === 'productos' ? 'active' : '' %>">Productos</a>
+                        <ul>
+                            <li><a href="/celulares" class="<%= currentPage === 'celulares' ? 'active' : '' %>">
+                                    <div class="icon-line1"></div>Celulares
+                                </a></li>
+                            <li><a href="/consolas" class="<%= currentPage === 'consolas' ? 'active' : '' %>">
+                                    <div class="icon-line2"></div>Consolas
+                                </a></li>
+                            <li><a href="/portatiles" class="<%= currentPage === 'portatiles' ? 'active' : '' %>">
+                                    <div class="icon-line3"></div>Portatiles
+                                </a></li>
+                            <li><a href="/monitores" class="<%= currentPage === 'monitores' ? 'active' : '' %>">
+                                    <div class="icon-line4"></div>Monitores
+                                </a></li>
+                        </ul>
+                    </li>
+                    <li> <a href="Nuevo.html">Nuevo</a></li>
+                    <li> <a href="Imagenes.html">Imagenes</a></li>
+                    <li> <a href="Sobre Mi.html">Sobre Mi</a></li>
+                    <li> <a href="/crudUser" class="<%= currentPage === 'crudUser' ? 'active' : '' %>">Opiniones</a></li>
+                </ul>
+            </nav>
+            <!-- MODAL EN GENERAL-->
+            <div id="myModal" class="Modal">
+                <!-- CONTENIDO MODAL -->
+                <div class="cont-todo" id="cont-todo">
+                    <div class="cont-trasera">
+                        <div class="cajaTrasera-login">
+                            <h3>¿Ya tienes una Cuenta?</h3>
+                            <p>Inicia secion para poder comprar</p>
+                            <button id="btn-iniciar-sesion">Iniciar sesion</button>
+                        </div>
+
+                        <div class="cajaTrasera-register">
+                            <h3>¿Aún no tienes una cuenta?</h3>
+                            <p>Registratate para que puedas acceder</p>
+                            <button id="btn-iniciar-registrarse">Registrarse</button>
+                        </div>
+                    </div>
+
+                    <div class="contenedorLogin-Register">
+
+                        <form action="/auth" class="formulario-Login" method="POST">
+                            <span class="close" id="close" &times;><i class='bx bx-x-circle'></i></span>
+                            <h2>Iniciar Sesión</h2>
+
+                            <div class="input-container">
+                                <input type="email" name="email" required>
+                                <label for="urs">Email</label>
+                            </div>
+
+                            <div class="input-container">
+                                <input type="password" name="pass" required>
+                                <label for="psw">Contraseña</label>
+                            </div>
+
+                            <button type="submit" class="btn-Login">Entrar</button>
+                        </form>
+
+
+                        <form action="/register" class="formulario-Register" method="POST">
+                            <span class="close" id="closes" &times;><i class='bx bx-x-circle'></i></span>
+                            <h2>Registrarse</h2>
+
+                            <!-- <div class="input-container">
+                                    <input type="text" required>
+                                    <label for="urs">Nombre y Apellido</label>
+                                </div> -->
+
+                            <div class="input-container">
+                                <input type="text" name="name" required>
+                                <label for="urs">Nombre</label>
+                            </div>
+
+                            <div class="input-container">
+                                <input type="email" name="email" required>
+                                <label for="urs">Email</label>
+                            </div>
+
+                            <div class="input-container">
+                                <input type="password" name="pass" required>
+                                <label for="psw">Contraseña</label>
+                            </div>
+                            <!-- NOTA: En caso de no poder crear usuario ADMIN descomentaresta linea de codigo y agregar la opcion de ROL en app.js -->
+                            <!-- <div class="incput-container">
+                                <select name="rol" id="rol" class="select-rol">
+                                    <option value="adim" selected>Admin</option>
+                                    <option value="data entry">Data entry</option>
+                                </select>
+                            </div> -->
+
+                            <button type="submit" class="btn-Register">Registrarse</button>
+                        </form>
+                    </div>
+
+
+                    <!-- <h3 style="text-align: center;">INGRESAR</h3>
+
+                                <i class='bx bxs-user'></i>
+
+                                <div class="input-name">
+                                    <input type="text" class="form-controlA" id="urs">
+                                    <label for="urs">Ingresar Nombre</label>
+                                </div>
+                                <div class="input-pwd">
+                                    <input type="password" class="form-controlB" id="pwd">
+                                    <label for="usr">Ingresar Contraseña </label>
+                                </div>
+                                <button class="acces">Ingresar</button> -->
+                </div>
+
+                <!-- CONTENIDO MODAL -->
+            </div>
+
+            <!-- MODAL  EN GENERAL-->
+        </div>
+    </div>
+</header>
+
+

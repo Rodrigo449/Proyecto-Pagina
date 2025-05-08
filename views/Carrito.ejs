@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="/CSS/Style.css">
+    <script src="/JS/index.js" defer></script>
+    <script src="https://kit.fontawesome.com/61e6876d4e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+
+    <link rel="icon" href="/Image/favicon.ico" sizes="any">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MR Ingenier" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+
+    <div class="spaceCarro">
+        <div class="classlistLeft">
+            <div class="contentProducto">
+                <h2>Lista de Productos</h2>
+            </div>
+            <div id="productos-carrito">
+                <!-- Los productos se cargarán dinámicamente aquí -->
+            </div>
+            <div id="carrito-vacio" class="text-center py-4">
+                <p>No hay productos en el carrito</p>
+                <a href="/productos" class="btn btn-primary">Ver productos</a>
+            </div>
+            <div class="add-product-container">
+                <button id="btn-agregar-producto" class="btn-agregar">
+                    <i class="fa-solid fa-plus"></i> Agregar producto
+                </button>
+            </div>
+        </div>
+
+        <div class="classlistRight">
+            <div class="contentPrice">
+                <h2>Precios Productos</h2>
+            </div>
+            <div id="precios-container">
+                <!-- Los precios se cargarán dinámicamente aquí -->
+            </div>
+            <div class="totalPrice">
+                <span>TOTAL: <span id="subtotal">$0.00</span></span>
+                <button id="btn-pagar" class="btnPagar">Pagar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template para productos en el carrito -->
+    <template id="producto-carrito-template">
+        <div class="producto-carrito mb-3">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="/placeholder.svg" alt="" class="img-fluid producto-imagen">
+                </div>
+                <div class="col-md-4">
+                    <h5 class="producto-nombre"></h5>
+                </div>
+                <div class="col-md-2">
+                    <div class="d-flex align-items-center itemss">
+                        <button class="btn btn-sm btn-outline-secondary btn-decrementar"><i
+                                class="fa-solid fa-circle-plus pluss"></i></button>
+                        <span class="mx-2 producto-cantidad">1</span>
+                        <button class="btn btn-sm btn-outline-secondary btn-incrementar"><i
+                                class="fa-solid fa-circle-minus minuss"></i></button>
+                    </div>
+                </div>
+                <div class="col-md-2 text-end">
+                    <span class="producto-precio"></span>
+                </div>
+                <div class="col-md-2 text-end">
+                    <button class="btn btn-sm btn-danger btn-eliminar">
+                        <i class="fa fa-trash trashh"></i>
+                    </button>
+                </div>
+            </div>
+            <hr>
+        </div>
+    </template>
+    <!-- Template para precios -->
+    <template id="precio-template">
+        <div class="priceProduct" data-id="">
+            <span class="precio-valor">$0.00</span>
+        </div>
+    </template>
+
+
+
+
+    <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+                // Función para verificar si el usuario ha iniciado sesión
+            function usuarioHaIniciadoSesion() {
+                const userElement = document.querySelector('.user-info') || document.getElementById('user-logged-in');
+                if (userElement) return true;
+
+                if (typeof isLoggedIn !== 'undefined' && isLoggedIn === true) return true;
+
+                if (document.body.getAttribute('data-user-logged-in') === 'true') return true;
+
+                return false;
+            }
+
+            // Verificar si el usuario ha iniciado sesión antes de mostrar el carrito
+            if (!usuarioHaIniciadoSesion()) {
+                // Mostrar mensaje de que debe iniciar sesión
+                Swal.fire({
+                    title: 'Inicio de sesión requerido',
+                    text: 'Debes iniciar sesión para ver tu carrito',
+                    icon: 'warning',
+                    confirmButtonText: 'Iniciar sesión',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
+                }).then(() => {
+                    // Redirigir a la página de inicio de sesión
+                    window.location.href = '/';
+                });
+                return;
+            }
+
+
+
+
+
+                const productosCarritoContainer = document.getElementById('productos-carrito');
+                const carritoVacioContainer = document.getElementById('carrito-vacio');
+                const subtotalElement = document.getElementById('subtotal');
+                const totalElement = document.getElementById('precio-total');
+                const btnPagar = document.getElementById('btn-pagar');
+                const productoTemplate = document.getElementById('producto-carrito-template');
+
+                // Cargar productos del carrito
+                function cargarProductosCarrito() {
+                    // Obtener carrito del localStorage
+                    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+                    // Limpiar el contenedor
+                    if (productosCarritoContainer) {
+                        productosCarritoContainer.innerHTML = '';
+                    }
+
+                    // Mostrar mensaje si el carrito está vacío
+                    if (carrito.length === 0) {
+                        if (carritoVacioContainer) {
+                            carritoVacioContainer.style.display = 'block';
+                        }
+                        if (btnPagar) {
+                            btnPagar.disabled = true;
+                        }
+                    } else {
+                        if (carritoVacioContainer) {
+                            carritoVacioContainer.style.display = 'none';
+                        }
+                        if (btnPagar) {
+                            btnPagar.disabled = false;
+                        }
+
+                        // Agregar cada producto al DOM
+                        if (productosCarritoContainer && productoTemplate) {
+                            carrito.forEach(producto => {
+                                const productoElement = productoTemplate.content.cloneNode(true);
+
+                                // Establecer datos del producto
+                                const imagenElement = productoElement.querySelector('.producto-imagen');
+                                const nombreElement = productoElement.querySelector('.producto-nombre');
+                                const cantidadElement = productoElement.querySelector('.producto-cantidad');
+                                const precioElement = productoElement.querySelector('.producto-precio');
+
+                                if (imagenElement) {
+                                    imagenElement.src = producto.imagen;
+                                    imagenElement.alt = producto.nombre;
+                                }
+
+                                if (nombreElement) {
+                                    nombreElement.textContent = producto.nombre;
+                                }
+
+                                if (cantidadElement) {
+                                    cantidadElement.textContent = producto.cantidad;
+                                }
+
+                                if (precioElement) {
+                                    precioElement.textContent = `$${formatearPrecio(producto.subtotal)}`;
+                                }
+
+                                // Establecer atributo data-id para identificar el producto
+                                const productoContainer = productoElement.querySelector('.producto-carrito');
+                                if (productoContainer) {
+                                    productoContainer.setAttribute('data-id', producto.productoId);
+                                }
+
+                                // Configurar botones de incrementar/decrementar/eliminar
+                                const btnDecrementar = productoElement.querySelector('.btn-decrementar');
+                                const btnIncrementar = productoElement.querySelector('.btn-incrementar');
+                                const btnEliminar = productoElement.querySelector('.btn-eliminar');
+
+                                if (btnDecrementar) {
+                                    btnDecrementar.addEventListener('click', function () {
+                                        decrementarCantidad(producto.productoId);
+                                    });
+                                }
+
+                                if (btnIncrementar) {
+                                    btnIncrementar.addEventListener('click', function () {
+                                        incrementarCantidad(producto.productoId);
+                                    });
+                                }
+
+                                if (btnEliminar) {
+                                    btnEliminar.addEventListener('click', function () {
+                                        eliminarProducto(producto.productoId);
+                                    });
+                                }
+
+                                // Agregar al contenedor
+                                productosCarritoContainer.appendChild(productoElement);
+                            });
+                        }
+                    }
+
+                    // Actualizar totales
+                    actualizarTotales();
+                }
+
+                // Decrementar cantidad de un producto
+                function decrementarCantidad(productoId) {
+                    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                    const productoIndex = carrito.findIndex(item => item.productoId === productoId);
+
+                    if (productoIndex !== -1) {
+                        if (carrito[productoIndex].cantidad > 1) {
+                            carrito[productoIndex].cantidad -= 1;
+                            carrito[productoIndex].subtotal = carrito[productoIndex].precioUnitario * carrito[productoIndex].cantidad;
+                            localStorage.setItem('carrito', JSON.stringify(carrito));
+                            cargarProductosCarrito();
+                        }
+                    }
+                }
+
+                // Incrementar cantidad de un producto
+                function incrementarCantidad(productoId) {
+                    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                    const productoIndex = carrito.findIndex(item => item.productoId === productoId);
+
+                    if (productoIndex !== -1) {
+                        carrito[productoIndex].cantidad += 1;
+                        carrito[productoIndex].subtotal = carrito[productoIndex].precioUnitario * carrito[productoIndex].cantidad;
+                        localStorage.setItem('carrito', JSON.stringify(carrito));
+                        cargarProductosCarrito();
+                    }
+                }
+
+                // Eliminar un producto del carrito
+                function eliminarProducto(productoId) {
+                    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                    const productoAEliminar = carrito.find(item => item.productoId === productoId);
+
+                    if (productoAEliminar) {
+                        // Mostrar confirmación con SweetAlert2
+                        Swal.fire({
+                            title: '¿Eliminar producto?',
+                            text: `¿Estás seguro de que deseas eliminar ${productoAEliminar.nombre} del carrito?`,
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonText: 'Sí, eliminar',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                const nuevoCarrito = carrito.filter(item => item.productoId !== productoId);
+                                localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
+
+                                // Mostrar mensaje de éxito
+                                Swal.fire(
+                                    '¡Eliminado!',
+                                    'El producto ha sido eliminado del carrito.',
+                                    'success'
+                                );
+
+                                cargarProductosCarrito();
+                            }
+                        });
+                    }
+                }
+
+                // Actualizar subtotal y total
+                function actualizarTotales() {
+                    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+                    // Calcular subtotal
+                    const subtotal = carrito.reduce((total, producto) => total + producto.subtotal, 0);
+
+                    // Actualizar elementos en el DOM
+                    if (subtotalElement) {
+                        subtotalElement.textContent = `$${formatearPrecio(subtotal)}`;
+                    }
+
+                    if (totalElement) {
+                        totalElement.textContent = `$${formatearPrecio(subtotal)}`;
+                    }
+                }
+
+                // Formatear precio con separadores de miles
+                function formatearPrecio(precio) {
+                    return new Intl.NumberFormat('es-CL').format(precio);
+                }
+
+                // Cargar productos al iniciar
+                cargarProductosCarrito();
+
+                // Configurar botón de pagar
+                if (btnPagar) {
+                    btnPagar.addEventListener('click', function () {
+                        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+                        if (carrito.length === 0) {
+                            Swal.fire({
+                                title: 'Carrito vacío',
+                                text: 'Por favor, agregue productos al carrito antes de pagar.',
+                                icon: 'warning',
+                                confirmButtonText: 'Entendido'
+                            });
+                            return;
+                        }
+
+                        Swal.fire({
+                            title: 'Proceder al pago',
+                            text: '¿Deseas continuar con el proceso de pago?',
+                            icon: 'question',
+                            showCancelButton: true,
+                            confirmButtonText: 'Sí, pagar ahora',
+                            cancelButtonText: 'Cancelar'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Aquí iría la lógica para procesar el pago
+                                Swal.fire(
+                                    'Procesando pago',
+                                    'Tu pago está siendo procesado...',
+                                    'info'
+                                );
+
+                                // Simulación de procesamiento (reemplazar con tu lógica real)
+                                setTimeout(() => {
+                                    Swal.fire(
+                                        '¡Pago completado!',
+                                        'Tu compra ha sido procesada con éxito.',
+                                        'success'
+                                    ).then(() => {
+                                        // Limpiar carrito y redirigir
+                                        localStorage.removeItem('carrito');
+                                        window.location.href = '/'; // Redirigir a la página principal
+                                    });
+                                }, 2000);
+                            }
+                        });
+                    });
+                }
+            });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/CSS/Style.css">
+    <script src="/JS/index.js" defer></script>
+    <script src="https://kit.fontawesome.com/61e6876d4e.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <link rel="icon" href="/Image/favicon.ico" sizes="any">
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="MR Ingenier" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Crud</title>
+</head>
+<body>
+    <header>
+        <div class="Header_Superior">
+            <div class="logo">
+                <img src="/Image/LogoMR.jpg" alt="Imagen_Logo">
+            </div>
+            <div class="Search">
+                <input type="text" id="searchInput" placeholder="¿Qué es lo que buscas aquí?" onkeyup="buscar()">
+                <ul id="resultList"></ul> <!-- Aqui se mostraran las sugerencias -->
+                <a href="#"><i class='bx bx-search-alt-2 Lup'></i></a>
+            </div>
+            <div class="Oscuro">
+                <i class="fa-solid fa-moon" id="DarkMode"></i>
+                <i class="fa-solid fa-sun" id="sun"></i>
+
+            </div>
+        </div>
+
+        <div class="container__menu">
+
+            <div class="menu">
+                <input type="checkbox" id="check__menu">
+                <label id="label__check" for="check__menu">
+                    <i class="fa-solid fa-bars  icon__menu"></i>
+                </label>
+                <!-- <a href="#" id="myBtn" class="ant-User">
+                    <i class='bx bxs-user-circle User'></i>
+                    <% if (typeof user !== 'undefined') { %>
+                        <div><%= user.name %> | <a href="/logout">Cerrar sesión</a></div>
+                    <% } else { %>
+                        <div>Iniciar sesión</div>
+                    <% } %>
+                </a> -->
+
+
+                <div class="btn-ini">
+                    <a href="#" id="myBtn" class="ant-User">
+                        <i class='bx bxs-user-circle User'></i>
+                        <% if (typeof user !=='undefined' ) { %>
+                            <div class="cerrar-sesion">
+                                <%= user.name %> | Cerrar sesión
+                            </div>
+                            <% } else { %>
+                                <div class="iniciar-sesion"><b>Iniciar sesión</b></div>
+                                <% } %>
+                    </a>
+
+                </div>
+
+
+                <!-- <div class="ant-User">
+                    <i class='bx bxs-user-circle User' id="myBtn"></i>
+                  
+                    <% if (typeof user !== 'undefined') { %>
+                      <div class="user-actions">
+                        <span><%= user.name %></span> |
+                        <form action="/logout" method="POST" style="display:inline;">
+                          <button type="submit" class="logout-btn">Cerrar sesión</button>
+                        </form>
+                      </div>
+                    <% } else { %>
+                      <div>
+                        <a href="#" class="sesion-text">Iniciar sesión</a>
+                      </div>
+                    <% } %>
+                  </div> -->
+
+                <nav>
+                    <ul>
+                        <li> <a href="/"></a></li>
+                        <li> <a href="productos">Productos</a>
+                            <ul>
+                                <li><a href="celulares">
+                                        <div class="icon-line1"></div>Celulares
+                                    </a></li>
+                                <li><a href="consolas">
+                                        <div class="icon-line2"></div>Consolas
+                                    </a></li>
+                                <li><a href="portatiles">
+                                        <div class="icon-line3"></div>Portatiles
+                                    </a></li>
+                                <li><a href="monitores">
+                                        <div class="icon-line4"></div>Monitores
+                                    </a></li>
+                            </ul>
+                        </li>
+                        <li> <a href="crudUser" id="selected">Opiniones</a></li>
+                    </ul>
+                </nav>
+
+                <div id="myModal" class="Modal">
+                    <!-- CONTENIDO MODAL -->
+                    <div class="cont-todo" id="cont-todo">
+                        <div class="cont-trasera">
+                            <div class="cajaTrasera-login">
+                                <h3>¿Ya tienes una Cuenta?</h3>
+                                <p>Inicia secion para poder comprar</p>
+                                <button id="btn-iniciar-sesion">Iniciar sesion</button>
+                            </div>
+
+                            <div class="cajaTrasera-register">
+                                <h3>¿Aún no tienes una cuenta?</h3>
+                                <p>Registratate para que puedas acceder</p>
+                                <button id="btn-iniciar-registrarse">Registrarse</button>
+                            </div>
+                        </div>
+
+                        <div class="contenedorLogin-Register">
+
+                            <form action="/auth" class="formulario-Login" method="POST">
+                                <span class="close" id="close" &times;><i class='bx bx-x-circle'></i></span>
+                                <h2>Iniciar Sesión</h2>
+
+                                <div class="input-container">
+                                    <input type="text" name="user" required>
+                                    <label for="urs">Nombre</label>
+                                </div>
+
+                                <div class="input-container">
+                                    <input type="password" name="pass" required>
+                                    <label for="psw">Contraseña</label>
+                                </div>
+
+                                <button type="submit" class="btn-Login">Entrar</button>
+                            </form>
+
+
+                            <form action="/register" class="formulario-Register" method="POST">
+                                <span class="close" id="closes" &times;><i class='bx bx-x-circle'></i></span>
+                                <h2>Registrarse</h2>
+
+                                <!-- <div class="input-container">
+                                        <input type="text" required>
+                                        <label for="urs">Nombre y Apellido</label>
+                                    </div> -->
+
+                                <div class="input-container">
+                                    <input type="text" name="name" required>
+                                    <label for="urs">Nombre</label>
+                                </div>
+
+                                <div class="input-container">
+                                    <input type="email" name="email" required>
+                                    <label for="urs">Email</label>
+                                </div>
+
+                                <div class="input-container">
+                                    <input type="password" name="pass" required>
+                                    <label for="psw">Contraseña</label>
+                                </div>
+
+                                <!-- <div class="incput-container">
+                                    <select name="rol" id="rol" class="select-rol">
+                                        <option value="adim" selected>Admin</option>
+                                        <option value="data entry">Data entry</option>
+                                    </select>
+                                </div> -->
+
+                                <button type="submit" class="btn-Register">Registrarse</button>
+                            </form>
+                        </div>
+
+
+                        <!-- <h3 style="text-align: center;">INGRESAR</h3>
+    
+                                    <i class='bx bxs-user'></i>
+    
+                                    <div class="input-name">
+                                        <input type="text" class="form-controlA" id="urs">
+                                        <label for="urs">Ingresar Nombre</label>
+                                    </div>
+                                    <div class="input-pwd">
+                                        <input type="password" class="form-controlB" id="pwd">
+                                        <label for="usr">Ingresar Contraseña </label>
+                                    </div>
+                                    <button class="acces">Ingresar</button> -->
+                    </div>
+
+                    <!-- CONTENIDO MODAL -->
+                </div>
+
+                <!-- MODAL  EN GENERAL-->
+            </div>
+        </div>
+    </header>
+    <!-- =========================CRUD====================== -->
+    <button class="btn-user" id="newUser"><a href="#">Crear Nuevo Usuario</a></button>
+    
+<table class="tabla-cd">
+        <tr class="cabezera">
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <!-- <th>Contraseña</th> -->
+            <th>Rol</th>
+            <th>Actualizar/Eliminar</th>
+        </tr>
+    
+        <tbody>
+            <% users.forEach(user => { %>
+                <tr class="content-table">
+                    <td><%= user.id %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.email %></td>
+                    <!-- <td><%= user.pass %></td> -->
+                    <td><%= user.rol %></td>
+                    <td class="botones" >
+                        <button class="funciones-edit" 
+                                data-id="<%= user.id %>" 
+                                data-name="<%= user.name %>" 
+                                data-email="<%= user.email %>" 
+                                data-rol="<%= user.rol %>">
+                            <i class="fa-regular fa-pen-to-square edit"></i>
+                        </button> 
+                        <button class="funciones-delete" action="" onclick="deleteUser(<%= user.id %>)">
+                            <i class="fa-solid fa-trash-can delete"></i>
+                        </button>
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+        
+        
+</table>
+<!-- =============================MODAL CREAR USUSARIO======================== -->
+<section class="modal-create" id="createModal">
+    <div class="content-create" id="createContent">
+        <form action="/createUser" class="cont-trans" method="POST">
+            <span class="close" id="closeCreate" &times;><i class='bx bx-x-circle'></i></span>
+            <h1 class="titulo-create">Crear Nuevo Usuario</h1>
+            <div class="input-create">
+                <div class="input-create-name">
+                    <input type="text" name="name" placeholder="Nombre" required>
+                </div>
+                <div class="input-create-email">
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-create-password">
+                    <input type="text" name="pass" placeholder="Contraseña" requiered>
+                </div>
+                <div class="input-create-rol">
+                    <select name="rol" id="rol">
+                        <option value="adim">Administrador</option>
+                        <option value="data entry">Cliente Prueba</option>
+                    </select>
+                </div>
+                <div class="buton-confirm-create">
+                    <button><b>Confirmar</b></button></div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- =============================MODAL CREAR USUSARIO======================== -->
+
+<!-- ==============================MODAL EDITAR USUARIO========================= -->
+<section class="modal-update" id="updateModal">
+    <div class="content-update" id="updateContent">
+        <form action="/updateUser" id="updateForm" method="POST">
+            <span class="close" id="closeUpdate" &times;><i class='bx bx-x-circle'></i></span>
+            <h1 class="titulo-update">Actualizar Usuario</h1>
+            <div class="input-update">
+                <div class="input-update-name">
+                    <input type="text" id="updateNombre" name="name" placeholder="Nombre" required>
+                </div>
+                <div class="input-update-email">
+                    <input type="email" id="updateEmail" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-update-password" required>
+                    <input type="text" name="pass" placeholder="Nueva Contraseña (Opcional)">
+                </div>
+                <div class="input-update-rol">
+                    <select name="rol" id="updateRol">
+                        <option value="adim">Administrador</option>
+                        <option value="data entry">Cliente Prueba</option>
+                    </select>
+                </div>
+                <div class="buton-confirm-update">
+                    <button><b>Confirmar</b></button></div>
+            </div>
+        </form>
+    </div>
+</section>
+
+<!-- ==============================MODAL EDITAR USUARIO========================= -->
+<!-- =========================CRUD====================== -->
+
+<% if (typeof alert != "undefined" && alert !==null) { %>
+    <script>
+        Swal.fire({
+            title: '<%= alert.alertTitle %>',
+            text: '<%= alert.alertMessage %>',
+            icon: '<%= alert.alertIcon %>',
+            showConfirmButton: <%= alert.showConfirmButton %>,
+            timer: <%= alert.timer %>
+        }).then(() => {
+            <% if (alert.ruta && alert.ruta !== '') { %>
+                window.location = '/<%= alert.ruta %>';
+            <% } %>
+        });
+    </script>
+    <% } %>
+    
+</body>
+</html>
